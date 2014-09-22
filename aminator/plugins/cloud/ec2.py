@@ -334,7 +334,12 @@ class EC2CloudPlugin(BaseCloudPlugin):
         return False
 
     def save_registered_ami_id(self,ami_id):
-        environ['AMINATOR_REGISTERED_AMI_ID'] = ami_id
+        environ['AMINATOR_REGISTERED_AMI_ID'] = str(ami_id)
+
+    def get_registered_ami_id(self):
+        if 'AMINATOR_REGISTERED_AMI_ID' in environ:
+            return environ['AMINATOR_REGISTERED_AMI_ID']
+        return None
 
     @registration_retry(tries=3, delay=1, backoff=1)
     def _register_image(self, **ami_metadata):
