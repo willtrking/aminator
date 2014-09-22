@@ -333,6 +333,9 @@ class EC2CloudPlugin(BaseCloudPlugin):
         log.debug('{0} not stale, using'.format(dev))
         return False
 
+    def save_registered_ami_id(self,ami_id):
+        environ['AMINATOR_REGISTERED_AMI_ID'] = ami_id
+
     @registration_retry(tries=3, delay=1, backoff=1)
     def _register_image(self, **ami_metadata):
         context = self._config.context
@@ -353,6 +356,7 @@ class EC2CloudPlugin(BaseCloudPlugin):
                     else:
                         raise e
             log.info('AMI registered: {0} {1}'.format(ami.id, ami.name))
+            self.save_registered_ami_id(ami.id)
             context.ami.image = self._ami = ami
             return True
 

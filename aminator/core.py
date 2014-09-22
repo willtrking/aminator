@@ -69,4 +69,5 @@ class Aminator(object):
             ok = env.provision()
             if ok:
                 log.info('Amination complete!')
+                log.info('AMI: {0}'.format(os.environ['AMINATOR_REGISTERED_AMI_ID']))
         return 0 if ok else 1
