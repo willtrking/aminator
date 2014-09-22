@@ -91,6 +91,10 @@ class BaseCloudPlugin(BasePlugin):
         """ Saves the registered AMI ID if registration was successful """
 
     @abc.abstractmethod
+    def get_registered_ami_id(self, *args, **kwargs):
+        """ Get the registered AMI ID saved with 'save_registered_ami_id' """
+
+    @abc.abstractmethod
     def register_image(self, *args, **kwargs):
         """ Instructs the cloud provider to register a finalized image for launching """
 
