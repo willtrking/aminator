@@ -88,4 +88,5 @@ class Environment(object):
         self._config.context['environment'] = self._name
         self._attach_plugins()
         self._registered_ami_id = None
+
         return self
